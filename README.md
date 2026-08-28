@@ -8,18 +8,20 @@
 
 ## Set Up and Use
 
+### GitHub CoPilot
+
+*This example used GitHub CoPilot with manual oversight guiding the creation of numerous Dependency Injection, Database Caching, and Docker `entrypoint.sh` examples.*
+
+### Docker
+
 **Docker Compose**:
 ```bash
 docker compose up
 ```
 
-The MSSQL image uses a custom entrypoint that waits for SQL Server readiness and automatically runs `mssql/init_sql.sql` with `sqlcmd`. The script is safe to rerun when the container restarts.
+> *Uses a custom `ENTRYPOINT` that waits for MSSQL readiness and automatically runs `mssql/init_sql.sql` with `sqlcmd`. The script is safe to rerun when the container restarts.* (Thanks AI!)
 
 ## Topics
-
-### GitHub CoPilot
-
-*This example used GitHub CoPilot with manual oversight guiding the creation of numerous Dependency Injection and Database Caching examples.*
 
 ### .NET CLI
 
