@@ -15,11 +15,16 @@ docker compose up
 
 ## Topics
 
+### GitHub CoPilot
+
+*This example used GitHub CoPilot with manual oversight guiding the creation of numerous Dependency Injection and Database Caching examples.*
+
 ### .NET CLI
 
 ```bash
 dotnet new mvc --language "C#"
 dotnet run
+dotnet test
 ```
 
 ### ASP.NET
@@ -30,6 +35,13 @@ Views and Endpoints:
 * Default Home -> https://localhost:5177/
 * Prebuilt Context Path Example -> https://localhost:5177/Home/Privacy
 * Asynchronous SQL Response -> https://localhost:5177/Example/SqlExamples
+
+Interface and Dependency Injection:
+* https://0.0.0.0:5177/Service/SimpleExample
+* https://0.0.0.0:5177/Service/ServiceLifetime
+* https://0.0.0.0:5177/Service/KeyedServices
+* https://0.0.0.0:5177/Service/EnumerableServices
+* https://0.0.0.0:5177/Service/ThreadSafeSingleton
 
 ### EntityFrameworkCore
 
@@ -70,3 +82,8 @@ The Docker Container uses Kerberos authentication which should be configured. Us
 ```
 
 > https://learn.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver16
+
+## Resources and Links
+
+1. https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/service-lifetimes
+1. https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/guidelines
