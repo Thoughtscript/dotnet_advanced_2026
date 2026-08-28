@@ -3,3 +3,4 @@ bin
 Debug
 dotnet_2025.sln
 .vs
+.DS_Store
