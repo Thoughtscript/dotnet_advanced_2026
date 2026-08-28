@@ -13,6 +13,8 @@
 docker compose up
 ```
 
+The MSSQL image uses a custom entrypoint that waits for SQL Server readiness and automatically runs `mssql/init_sql.sql` with `sqlcmd`. The script is safe to rerun when the container restarts.
+
 ## Topics
 
 ### GitHub CoPilot
@@ -24,6 +26,8 @@ docker compose up
 ```bash
 dotnet new mvc --language "C#"
 dotnet run
+
+# For less detailed tests
 dotnet test
 ```
 
@@ -42,6 +46,26 @@ Interface and Dependency Injection:
 * https://0.0.0.0:5177/Service/KeyedServices
 * https://0.0.0.0:5177/Service/EnumerableServices
 * https://0.0.0.0:5177/Service/ThreadSafeSingleton
+
+### Caching
+
+```bash
+dotnet add package Microsoft.Extensions.Caching.Memory
+```
+
+Database query caching:
+* `ExampleQueryService` keeps the first query result in its scoped instance as a first-level cache.
+* `IMemoryCache` stores the result across scopes as a second-level cache for five minutes, with a one-minute sliding expiration.
+* https://0.0.0.0:5177/Example/SqlExamples
+
+### Tests
+
+Tests use `asp_entity/tests/asp_entity.runsettings` for detailed per-test console output, while the xUnit configuration enables diagnostic messages and full test method names. Run them with:
+
+```bash
+# From the top-level root directory
+dotnet test asp_entity/tests/asp_entity.Tests.csproj
+```
 
 ### EntityFrameworkCore
 
@@ -69,13 +93,14 @@ asp_entity-1  | The build failed. Fix the build errors and run again.
 > Exercise in MSSQL admin.
 
 1. `docker-entrypoint-initdb.d` isn't supported within the Docker Container but I've kept the convention for familiarity's sake.
-      * Execute: `/opt/mssql-tools18/bin/sqlcmd -U sa -P FD83wr9DF_*9pke89 -S localhost -No -i docker-entrypoint-initdb.d/init_sql.sql` to run the initial scripts.
+      * This: `/opt/mssql-tools18/bin/sqlcmd -U sa -P FD83wr9DF_*9pke89 -S localhost -No -i docker-entrypoint-initdb.d/init_sql.sql` is now executed using `entrypoint.sh`.
       * Since initialization doesn't happen immediately, I've added `sleep 120` to the [Bash script](./asp_entity/run.sh).
       * Some of the issues identified [here](https://github.com/Thoughtscript/dotnet_2025/blob/main/README.md) can be side-stepped on `macOS 26.6`.
 
 The Docker Container uses Kerberos authentication which should be configured. Use the following to verify the above using an inline query and script:
 
 ```bash
+/opt/mssql-tools18/bin/sqlcmd -U sa -P FD83wr9DF_*9pke89 -S localhost -No -i docker-entrypoint-initdb.d/init_sql.sql
 # Must use dbo syntax inline
 /opt/mssql-tools18/bin/sqlcmd -U sa -P FD83wr9DF_*9pke89 -S localhost -Q "SELECT * FROM TestDB.dbo.Example;" -C
 /opt/mssql-tools18/bin/sqlcmd -U sa -P FD83wr9DF_*9pke89 -S localhost -No -i docker-entrypoint-initdb.d/verify_sql.sql

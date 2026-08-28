@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Cm6RbGPoVVY=",
+  "dgSpecHash": "xnxefENQnfY=",
   "success": true,
   "projectFilePath": "/Users/adamgerard/Desktop/workspace/_2026/dotnet_advanced_2026/asp_entity/tests/asp_entity.Tests.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "/Users/adamgerard/.nuget/packages/microsoft.entityframeworkcore/10.0.11/microsoft.entityframeworkcore.10.0.11.nupkg.sha512",
     "/Users/adamgerard/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.11/microsoft.entityframeworkcore.abstractions.10.0.11.nupkg.sha512",
     "/Users/adamgerard/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.11/microsoft.entityframeworkcore.analyzers.10.0.11.nupkg.sha512",
+    "/Users/adamgerard/.nuget/packages/microsoft.entityframeworkcore.inmemory/10.0.11/microsoft.entityframeworkcore.inmemory.10.0.11.nupkg.sha512",
     "/Users/adamgerard/.nuget/packages/microsoft.entityframeworkcore.relational/10.0.11/microsoft.entityframeworkcore.relational.10.0.11.nupkg.sha512",
     "/Users/adamgerard/.nuget/packages/microsoft.entityframeworkcore.sqlserver/10.0.11/microsoft.entityframeworkcore.sqlserver.10.0.11.nupkg.sha512",
     "/Users/adamgerard/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.11/microsoft.extensions.caching.abstractions.10.0.11.nupkg.sha512",

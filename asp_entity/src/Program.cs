@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using asp_entity.Database;
 using asp_entity.Interfaces;
 using asp_entity.Services;
@@ -29,6 +30,11 @@ builder.Services.AddTransient<IEnumerableInterface>(_ => new IEnumerableInterfac
 builder.Services.AddSingleton<ThreadSafeSingletonInterface, ThreadSafeSingletonInterfaceImpl>();
 // Registers the service that aggregates and exposes all DI examples.
 builder.Services.AddTransient<DependencyInjectionService>();
+
+// Registers the in-memory cache used as the application-wide second-level cache.
+builder.Services.AddMemoryCache();
+// Registers the query service so its private cache is scoped per request.
+builder.Services.AddScoped<ExampleQueryService>();
 
 // Fetch from appsettings.json
 Console.WriteLine($"Initializing Database with Connection String: {builder.Configuration.GetConnectionString("MSSQL_DOCKER_CONNECTION_STRING")}");

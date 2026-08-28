@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using asp_entity.Database;
+using asp_entity.Services;
 
 namespace asp_entity.Controllers;
 
@@ -9,11 +10,16 @@ public class ExampleController : Controller
     private readonly ILogger<HomeController> _logger;
 
     private readonly ApplicationDatabaseContext _db;
+    private readonly ExampleQueryService _exampleQueryService;
 
-    public ExampleController(ILogger<HomeController> logger, ApplicationDatabaseContext ctx)
+    public ExampleController(
+        ILogger<HomeController> logger,
+        ApplicationDatabaseContext ctx,
+        ExampleQueryService exampleQueryService)
     {
         _logger = logger;
         _db = ctx;
+        _exampleQueryService = exampleQueryService;
     }
 
     // Automatic sub-path
@@ -41,7 +47,7 @@ public class ExampleController : Controller
     public async Task<IActionResult> SqlExamples()
     {
         Console.WriteLine($"Database can connect? {this._db.Database.CanConnect()}");
-        var examples = await this._db.Example.ToListAsync();
+        var examples = await _exampleQueryService.GetExamplesAsync();
         return Ok(examples);
     }
 }
