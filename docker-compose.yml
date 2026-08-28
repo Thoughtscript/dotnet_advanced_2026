@@ -1,0 +1,31 @@
+services:
+  mssql: 
+    build:
+      context: ./mssql
+      dockerfile: dockerfile
+    ports:
+      - 1431:1431 
+      - 1433:1433 
+    networks:
+      - testnet
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=FD83wr9DF_*9pke89
+      - MSSQL_PID=Developer
+
+  asp_entity: 
+    build:
+      context: ./asp_entity
+      dockerfile: dockerfile
+    ports:
+      - 5177:5177
+    networks:
+      - testnet
+    depends_on:
+      - mssql
+    restart: unless-stopped
+    
+networks:
+  testnet:
+    driver: bridge

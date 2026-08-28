@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0-noble
+
+RUN echo "Creating working dir and copying files"
+RUN mkdir /app
+WORKDIR /app
+COPY . .
+
+RUN dotnet dev-certs https
+
+CMD ["bash", "run.sh"]
