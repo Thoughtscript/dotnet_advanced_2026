@@ -1,0 +1,5 @@
+USE TestDB;
+GO
+
+SELECT * FROM Example;
+GO
