@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Registers MVC controllers and Razor views.
 builder.Services.AddControllersWithViews();
+builder.Services.AddOpenApi();
 
 // Registers a simple interface-to-implementation mapping with transient lifetime.
 builder.Services.AddTransient<SimpleExampleInterface, SimpleExampleInterfaceImpl>();
@@ -48,6 +49,8 @@ builder.Services.AddDbContext<ApplicationDatabaseContext>(
 
 var app = builder.Build();
 
+app.MapOpenApi();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -59,7 +62,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/openapi/v1.json", "asp_entity API v1");
+});
 app.MapStaticAssets();
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",

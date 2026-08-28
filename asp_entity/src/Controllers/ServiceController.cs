@@ -3,6 +3,8 @@ using asp_entity.Services;
 
 namespace asp_entity.Controllers;
 
+[ApiController]
+[Route("[controller]/[action]")]
 public class ServiceController : Controller
 {
     private readonly DependencyInjectionService _service;

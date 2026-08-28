@@ -5,6 +5,8 @@ using asp_entity.Services;
 
 namespace asp_entity.Controllers;
 
+[ApiController]
+[Route("[controller]/[action]")]
 public class ExampleController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -24,6 +26,7 @@ public class ExampleController : Controller
 
     // Automatic sub-path
     // GET: /Example/SimpleString
+    [HttpGet]
     public string SimpleString()
     {
         return "Simple String response...";

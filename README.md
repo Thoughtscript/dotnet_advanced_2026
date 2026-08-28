@@ -36,6 +36,8 @@ dotnet test
 ### ASP.NET
 
 Views and Endpoints:
+* Swagger UI -> https://localhost:5177/swagger
+* OpenAPI document -> https://localhost:5177/openapi/v1.json
 * Simple String/Text Response -> https://localhost:5177/Example/SimpleString
 * Automatic JSON Serialization -> https://localhost:5177/Example/JsonResponse
 * Default Home -> https://localhost:5177/
